@@ -15,3 +15,15 @@ The middleware will allow up to five requests per minute for each client.
 
 Custom rules can be implemented using the `IRateLimitRule` interface. The provided `LoginBurstRule`
 blocks clients making more than five requests to the `/login` endpoint within ten seconds.
+
+## Database Setup
+
+The sample includes an `AppDbContext` configured for SQLite. Run EF Core migrations to create the schema:
+```bash
+# add the initial migration
+ dotnet ef migrations add InitialCreate
+
+# update the database file
+ dotnet ef database update
+```
+The connection string defaults to `Data Source=app.db` and can be overridden in `appsettings.json`.
