@@ -27,3 +27,13 @@ The sample includes an `AppDbContext` configured for SQLite. Run EF Core migrati
  dotnet ef database update
 ```
 The connection string defaults to `Data Source=app.db` and can be overridden in `appsettings.json`.
+
+## Testing Rate Limiting
+
+1. Run the API:
+   ```bash
+   dotnet run
+   ```
+2. Open the Swagger UI at `http://localhost:5000/swagger` to explore endpoints. The sample exposes `/api/test/ping` which simply returns `200 OK`.
+3. Use a tool like Postman to send rapid requests to `/api/test/ping`.
+4. After five requests within a minute, the middleware responds with HTTP `429 Too Many Requests`, demonstrating rate limiting.
