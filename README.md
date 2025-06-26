@@ -10,3 +10,8 @@ app.UseMiddleware<ContextAwareRateLimiterMiddleware>();
 
 The middleware will allow up to five requests per minute for each client.
 
+
+## Rate Limit Rules
+
+Custom rules can be implemented using the `IRateLimitRule` interface. The provided `LoginBurstRule`
+blocks clients making more than five requests to the `/login` endpoint within ten seconds.
