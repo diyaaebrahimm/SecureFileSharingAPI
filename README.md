@@ -37,3 +37,20 @@ The connection string defaults to `Data Source=app.db` and can be overridden in 
 2. Open the Swagger UI at `http://localhost:5000/swagger` to explore endpoints. The sample exposes `/api/test/ping` which simply returns `200 OK`.
 3. Use a tool like Postman to send rapid requests to `/api/test/ping`.
 4. After five requests within a minute, the middleware responds with HTTP `429 Too Many Requests`, demonstrating rate limiting.
+
+## Docker
+
+Build the Docker image:
+```bash
+docker build -t context-aware-rate-limiter .
+```
+
+Run the container and mount a host directory for the SQLite database:
+```bash
+docker run -p 8080:80 \
+  -v $(pwd)/data:/data \
+  -e ConnectionStrings__Default="Data Source=/data/app.db" \
+  context-aware-rate-limiter
+```
+This publishes the API on `http://localhost:8080` and persists the `app.db` file
+in the `data` folder next to your clone.
